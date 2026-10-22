@@ -1,0 +1,342 @@
+<Window x:Class="EmployeeRegistrationWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Employee Registration System" Height="750" Width="1100"
+        WindowStartupLocation="CenterScreen" Background="#F4F7F6"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Background" Value="#0078D7"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#005A9E"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#004578"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="DangerButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#D13438"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#A80000"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#790000"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#005A9E"/>
+            <Setter Property="Margin" Value="0,10,0,15"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Title -->
+            <RowDefinition Height="*"/> <!-- Form Fields -->
+            <RowDefinition Height="Auto"/> <!-- Buttons -->
+            <RowDefinition Height="Auto"/> <!-- Search -->
+            <RowDefinition Height="*"/> <!-- DataGrid -->
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#005A9E" CornerRadius="5" Padding="15" Margin="0,0,0,20">
+            <TextBlock Text="EMPLOYEE REGISTRATION SYSTEM" Foreground="White" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0"/>
+        </Border>
+
+        <!-- Form Area -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Personal Information -->
+                <Border Grid.Column="0" Grid.Row="0" Background="White" CornerRadius="5" Padding="15" Margin="0,0,0,20">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#CCCCCC" Direction="320" ShadowDepth="2" Opacity="0.5" BlurRadius="5"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Personal Information" Style="{StaticResource SectionHeader}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Employee ID"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtEmployeeId" IsReadOnly="True" Background="#EEEEEE" Text="Auto-Generated"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Full Name"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtFullName"/>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Gender"/>
+                        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cmbGender">
+                            <ComboBoxItem Content="Select Gender" IsSelected="True"/>
+                            <ComboBoxItem Content="Male"/>
+                            <ComboBoxItem Content="Female"/>
+                            <ComboBoxItem Content="Other"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Date of Birth"/>
+                        <DatePicker Grid.Row="4" Grid.Column="1" x:Name="dpDateOfBirth"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Email"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtEmail"/>
+
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Mobile Number"/>
+                        <TextBox Grid.Row="6" Grid.Column="1" x:Name="txtMobile"/>
+                    </Grid>
+                </Border>
+
+                <!-- Job Information -->
+                <Border Grid.Column="2" Grid.Row="0" Background="White" CornerRadius="5" Padding="15" Margin="0,0,0,20">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#CCCCCC" Direction="320" ShadowDepth="2" Opacity="0.5" BlurRadius="5"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Job Information" Style="{StaticResource SectionHeader}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Department"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cmbDepartment">
+                            <ComboBoxItem Content="Select Department" IsSelected="True"/>
+                            <ComboBoxItem Content="IT"/>
+                            <ComboBoxItem Content="HR"/>
+                            <ComboBoxItem Content="Finance"/>
+                            <ComboBoxItem Content="Marketing"/>
+                            <ComboBoxItem Content="Sales"/>
+                            <ComboBoxItem Content="Operations"/>
+                            <ComboBoxItem Content="Administration"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Designation"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cmbDesignation">
+                            <ComboBoxItem Content="Select Designation" IsSelected="True"/>
+                            <ComboBoxItem Content="Software Developer"/>
+                            <ComboBoxItem Content="Software Engineer"/>
+                            <ComboBoxItem Content="HR Executive"/>
+                            <ComboBoxItem Content="Accountant"/>
+                            <ComboBoxItem Content="Manager"/>
+                            <ComboBoxItem Content="Team Leader"/>
+                            <ComboBoxItem Content="Intern"/>
+                            <ComboBoxItem Content="Other"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Employee Type"/>
+                        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cmbEmployeeType">
+                            <ComboBoxItem Content="Select Employee Type" IsSelected="True"/>
+                            <ComboBoxItem Content="Full Time"/>
+                            <ComboBoxItem Content="Part Time"/>
+                            <ComboBoxItem Content="Intern"/>
+                            <ComboBoxItem Content="Contract"/>
+                        </ComboBox>
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Joining Date"/>
+                        <DatePicker Grid.Row="4" Grid.Column="1" x:Name="dpJoiningDate"/>
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Salary"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtSalary"/>
+                    </Grid>
+                </Border>
+
+                <!-- Address Information -->
+                <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Background="White" CornerRadius="5" Padding="15" Margin="0,0,0,20">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#CCCCCC" Direction="320" ShadowDepth="2" Opacity="0.5" BlurRadius="5"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Address Information" Style="{StaticResource SectionHeader}"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Address" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtAddress" TextWrapping="Wrap" AcceptsReturn="True" Height="60" VerticalContentAlignment="Top"/>
+
+                        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Column="0" Text="City"/>
+                            <TextBox Grid.Column="1" x:Name="txtCity"/>
+                            
+                            <TextBlock Grid.Column="2" Text="State" Margin="15,0,0,5"/>
+                            <ComboBox Grid.Column="3" x:Name="cmbState">
+                                <ComboBoxItem Content="Select State" IsSelected="True"/>
+                                <ComboBoxItem Content="Gujarat"/>
+                                <ComboBoxItem Content="Maharashtra"/>
+                                <ComboBoxItem Content="Rajasthan"/>
+                                <ComboBoxItem Content="Madhya Pradesh"/>
+                                <ComboBoxItem Content="Delhi"/>
+                                <ComboBoxItem Content="Other"/>
+                            </ComboBox>
+                            
+                            <TextBlock Grid.Column="4" Text="Pincode" Margin="15,0,0,5"/>
+                            <TextBox Grid.Column="5" x:Name="txtPincode"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+            <Button x:Name="btnRegister" Content="Register" Width="120" Click="BtnRegister_Click"/>
+            <Button x:Name="btnUpdate" Content="Update" Width="120" Click="BtnUpdate_Click"/>
+            <Button x:Name="btnDelete" Content="Delete" Width="120" Style="{StaticResource DangerButton}" Click="BtnDelete_Click"/>
+            <Button x:Name="btnClear" Content="Clear" Width="120" Background="#6C757D" Click="BtnClear_Click"/>
+        </StackPanel>
+
+        <!-- Search -->
+        <Grid Grid.Row="3" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtSearch" Height="36" Padding="10,0" FontSize="15" 
+                     Text="Search employee..." Foreground="Gray"
+                     GotFocus="TxtSearch_GotFocus" LostFocus="TxtSearch_LostFocus" TextChanged="TxtSearch_TextChanged"/>
+        </Grid>
+
+        <!-- DataGrid -->
+        <DataGrid Grid.Row="4" x:Name="dgEmployees" AutoGenerateColumns="False" 
+                  IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow"
+                  AlternatingRowBackground="#F9F9F9" HeadersVisibility="Column"
+                  RowHeaderWidth="0" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#EEEEEE"
+                  BorderBrush="#DDDDDD" BorderThickness="1" SelectionChanged="DgEmployees_SelectionChanged">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#005A9E"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Padding" Value="10,8"/>
+                </Style>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Padding" Value="0,5"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding EmployeeId}" Width="SizeToCells" MinWidth="50"/>
+                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="*" MinWidth="120"/>
+                <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="SizeToCells" MinWidth="80"/>
+                <DataGridTextColumn Header="DOB" Binding="{Binding DateOfBirth, StringFormat=d}" Width="SizeToCells" MinWidth="100"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" MinWidth="150"/>
+                <DataGridTextColumn Header="Mobile" Binding="{Binding MobileNumber}" Width="SizeToCells" MinWidth="100"/>
+                <DataGridTextColumn Header="Department" Binding="{Binding Department}" Width="SizeToCells" MinWidth="100"/>
+                <DataGridTextColumn Header="Designation" Binding="{Binding Designation}" Width="SizeToCells" MinWidth="120"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding EmployeeType}" Width="SizeToCells" MinWidth="90"/>
+                <DataGridTextColumn Header="Joining Date" Binding="{Binding JoiningDate, StringFormat=d}" Width="SizeToCells" MinWidth="100"/>
+                <DataGridTextColumn Header="Salary" Binding="{Binding Salary, StringFormat=C2}" Width="SizeToCells" MinWidth="100"/>
+                <DataGridTextColumn Header="City" Binding="{Binding City}" Width="SizeToCells" MinWidth="100"/>
+                <DataGridTextColumn Header="State" Binding="{Binding State}" Width="SizeToCells" MinWidth="100"/>
+                <DataGridTextColumn Header="Pincode" Binding="{Binding Pincode}" Width="SizeToCells" MinWidth="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
